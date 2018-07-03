@@ -2,8 +2,14 @@
 layout: page
 ---
 
-# Little Shop Redux
+### This is a copy from the original project repo we used: https://github.com/jtrtj/little-shop-redux
+### See link above for waffle issues, commit insights and branches
+### Group project- Team of 3
+### Work Time- 1 week, 1 hour of class time was dedicated to design work time. 95% of project completed outside of class.
+### New Tools learned: ActiveRecord, Sinatra, Postgres, HTML5, CSS, MVC, HTTP, RSpec Testing, Waffle.io
 
+
+#PROJECT SPEC:
 ## Abstract
 
 In this project you'll use Ruby, Sinatra, and ActiveRecord to build a site that shows items by categories and analyzes those items.
