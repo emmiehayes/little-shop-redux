@@ -1,11 +1,52 @@
-<h1><%= @merchant.name %></h1>
+<!DOCTYPE html>
+  <html>
+    <head>
+      <meta charset="utf-8" />
+      <meta http-equiv="X-UA-Compatible" content="IE=edge">
+      <title>LittleShop</title>
+      <meta name="viewport" content="width=device-width, initial-scale=1">
+      <link rel="stylesheet" type="text/css" media="screen" href="/stylesheets/main.css" />
+      <link rel="stylesheet" type="text/css" media="screen" href="/stylesheets/show.css" />
+      
+    </head>
+    <body>
+      <nav id="navbar">
+        <ul>
+        <li style="float:left"><a class="logo" href="/merchants">LittleShop</a></li>
+        <li><a href="/merchants">Merchants</a></li>
+        <li><a href="/items">Items</a></li>
+        <li><a href="/invoices">Invoices</a></li>
+        </ul>
+      </nav>
+      <section>
+      <div class="input-form">
+        <h1 class="title"><%= @merchant.name %></h1>
+      <form action="/merchants/<%=@merchant.id%>/edit" method="GET">
+        <input type="hidden" name="_method" value="EDIT">
+        <input style="background-color:cornflowerblue" type="submit" value="Edit">
+      </form>
+      <form action="/merchants/<%= @merchant.id %>" method="POST">
+        <input type="hidden" name="_method" value="DELETE">
+        <input class="delete-button" type="submit" value="Delete">
+      </form>
+      </br>
+      </div>
+      <section class="grid-container">
+        <% @merchant.items.each do |item| %>
+          <div class="grid-item">
+          <ul>
+            <li><img src='<%= item.image %>'></li>
+            <li><a href="/items/<%=item.id%>"><%=item.title%></a></li>
+            <li>$ <%='%.2f' % item.price%></li>
+          </ul>
+          </div>
+        <% end %>
+      </section>
+    </body>
+  </html>
 
-<form action="/merchants/<%=@merchant.id%>/edit" method="GET">
-  <input type="hidden" name="_method" value="EDIT">
-  <input type="submit" value="Edit">
-</form>
 
-<form action="/merchants/<%= @merchant.id %>" method="POST">
-  <input type="hidden" name="_method" value="DELETE">
-  <input type="submit" value="Delete">
-</form>
+
+
+
+

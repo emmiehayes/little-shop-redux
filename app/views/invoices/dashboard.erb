@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+  <html>
+    <head>
+      <meta charset="utf-8" />
+      <meta http-equiv="X-UA-Compatible" content="IE=edge">
+      <title>LittleShop</title>
+      <meta name="viewport" content="width=device-width, initial-scale=1">
+      <link rel="stylesheet" type="text/css" media="screen" href="/stylesheets/main.css" />
+      
+    </head>
+    <body>
+      <nav id="navbar">
+        <ul>
+          <li style="float:left"><a class="logo" href="/merchants">LittleShop</a></li>
+          <li><a href="/merchants">Merchants</a></li>
+          <li><a href="/items">Items</a></li>
+          <li><a href="/invoices">Invoices</a></li>
+        </ul>
+      </nav>
+      <div class="banner">
+        <h1 class="title">Invoices Dashboard</h1>
+      </div>
+      <ul>
+        <li>Pending: <%=@percentage_pending.round %>%</li>
+        <li>Shipped: <%=@percentage_shipped.round%>%</li>
+        <li>Returned: <%=@percentage_returned.round%>%</li>
+      </ul>
+      <ul>
+        <li>Highest Invoice Total: <a href="/invoices/<%=@highest_total.id%>"><%=@highest_total.id%></a></li></br>
+        <li>Lowest Invoice Total: <a href="/invoices/<%=@lowest_total.id%>"><%=@lowest_total.id%></a></li></br>
+      </ul>
+
+      <ul>
+        <li>Highest Item Quantity: <a href="/invoices/<%=@highest_quantity.id%>"><%=@highest_quantity.id%></a></li></br>
+        <li>Lowest Item Quantity: <a href="/invoices/<%=@lowest_quantity.id%>"><%=@lowest_quantity.id%></a></li></br>
+      </ul>
+
+    </body>
+  </html>

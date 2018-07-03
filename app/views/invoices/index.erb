@@ -1,15 +1,42 @@
-<% @invoices.each do |invoice| %>
-  <div id="invoice_<%= invoice.id %>">
-    <ul>
-      <li><a href="/invoices/<%=invoice.id%>"><%=invoice.id%></a></li>
-    </ul>
-    <form action="/invoices/<%=invoice.id%>/edit" method="GET">
-      <input type="hidden" name="_method" value="EDIT">
-      <input type="submit" value="Edit">
-    </form>
-    <form action="/invoices/<%= invoice.id %>" method="POST">
-      <input type="hidden" name="_method" value="DELETE">
-      <input type="submit" value="Delete">
-    </form>
-  </div>
-<% end %>
+<!DOCTYPE html>
+  <html>
+    <head>
+      <meta charset="utf-8" />
+      <meta http-equiv="X-UA-Compatible" content="IE=edge">
+      <title>LittleShop</title>
+      <meta name="viewport" content="width=device-width, initial-scale=1">
+      <link rel="stylesheet" type="text/css" media="screen" href="/stylesheets/main.css" />
+    </head>
+    <body>
+      <nav id="navbar">
+        <ul>
+        <li style="float:left"><a class="logo" href="/merchants">LittleShop</a></li>
+        <li><a href="/merchants">Merchants</a></li>
+        <li><a href="/items">Items</a></li>
+        <li><a href="/invoices">Invoices</a></li>
+        </ul>
+      </nav>
+      <div class="banner">
+        <p><a href="/invoices/dashboard">Dashboard</a></p>
+        <h1 class="title">Invoices</h1>
+      </div>
+      <section>
+        <% @invoices.each do |invoice| %>
+        <div id="invoice_<%= invoice.id %>">
+          <table>
+            <tr><td class="row-name"><a href="/invoices/<%=invoice.id%>"><%=invoice.id%></a></td>
+              <td class="row-edit"><form action="/invoices/<%=invoice.id%>/edit" method="GET">
+                <input type="hidden" name="_method" value="EDIT">
+                <input type="submit" value="Edit">
+              </form></td>
+                <td class="row-delete"><form action="/invoices/<%= invoice.id %>" method="POST">
+                <input type="hidden" name="_method" value="DELETE">
+                <input type="submit" value="Delete">
+              </form></td>
+            </tr>
+          </table>
+        </div>
+        <% end %>
+      </section>
+    </body>
+  </html>

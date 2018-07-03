@@ -1,8 +1,43 @@
-<form class="new-item", action="/items" method="post">
-  <p>Enter Item Name:</p>
-  <input type="text" name="item[title]" value='Title'>
-  <input type="text" name="item[description]" value='Description'>
-  <input type="text" name="item[price]" value='Price'>
-  <input type="text" name="item[image]" value='Image'>
-  <input type="submit" value="Create Item">
-</form>
+<!DOCTYPE html>
+  <html>
+    <head>
+      <meta charset="utf-8" />
+      <meta http-equiv="X-UA-Compatible" content="IE=edge">
+      <title>LittleShop</title>
+      <meta name="viewport" content="width=device-width, initial-scale=1">
+      <link rel="stylesheet" type="text/css" media="screen" href="/stylesheets/main.css" />
+      <link rel="stylesheet" type="text/css" media="screen" href="/stylesheets/new.css" />
+      
+    </head>
+  
+   <body>
+    <nav id="navbar">
+      <ul>
+        <li style="float:left"><a class="logo" href="/merchants">LittleShop</a></li>
+        <li><a href="/merchants">Merchants</a></li>
+        <li><a href="/items">Items</a></li>
+        <li><a href="/invoices">Invoices</a></li>
+      </ul>
+    </nav>
+    <p>Create New Item:</p>
+      <form class='edit-item' action='/items' method='POST'>
+        <p><label>Merchant</label></br>
+        <select class="merchant-drop-down-list" name='item[merchant_id]'>
+          <%@merchants.each do |merchant|%>
+          <option value="<%=merchant.id%>"><%=merchant.name%></option>
+          <%end%>
+        </select></p></br>
+        <p><label>Title</label></br>
+        <input type='hidden' name='_method' value='POST'>
+        <textarea name='item[title]'></textarea></p></br>
+        <p><label>Description</label></br>
+        <textarea name='item[description]'></textarea></p><br/>
+        <p><label>Price</label></br>
+        <input type='text' name='item[price]'></p></br>
+        <p><label>Image URL</label></br>
+        <input type='text' name='item[image]'</br></br></br>
+        <input type='submit' value='Create'></p></br>
+      </form>
+      <form action="/items"><input type="submit" value="Cancel"></form>
+  </body>
+</html>

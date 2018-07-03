@@ -1,19 +1,6 @@
-RSpec.describe Item do
-  describe "Validations" do
-    it "should have attributes" do
-      item = Item.create(
-                      title: nil,
-                      description: nil,
-                      price: nil,
-                      image: nil
-                    )
-
-      expect(item).to_not be_valid
-    end
-  end
-
-  describe "Class Methods" do
-    it '.total_item_count' do
+RSpec.describe 'User' do
+  context 'visiting /items/dashboard' do
+    it 'should see item dashboard header' do
       item_1 = Item.create(
                         title: 'dog bed',
                         description: 'a bed for dogs',
@@ -28,10 +15,12 @@ RSpec.describe Item do
                         image: 'image url',
                         merchant_id: 3456
                       )
-      expect(Item.total_item_count).to eq(2)
+      visit '/items/dashboard'
+
+      expect(page).to have_content('Items Dashboard')
     end
 
-    it '.average_unit_price' do
+    it 'should see item total count' do
       item_1 = Item.create(
                         title: 'dog bed',
                         description: 'a bed for dogs',
@@ -46,10 +35,13 @@ RSpec.describe Item do
                         image: 'image url',
                         merchant_id: 3456
                       )
-      expect(Item.average_unit_price).to eq(600)
+
+      visit '/items/dashboard'
+
+      expect(page).to have_content("Total Item Count: #{Item.total_item_count}")
     end
 
-    it '.newest' do
+    it 'should see average price per item' do
       item_1 = Item.create(
                         title: 'dog bed',
                         description: 'a bed for dogs',
@@ -64,10 +56,13 @@ RSpec.describe Item do
                         image: 'image url',
                         merchant_id: 3456
                       )
-      expect(Item.newest).to eq(item_2)
+
+      visit '/items/dashboard'
+
+      expect(page).to have_content("Avg Price Per Item: $ #{Item.average_unit_price}")
     end
 
-    it '.oldest' do
+    it 'should see item by age' do
       item_1 = Item.create(
                         title: 'dog bed',
                         description: 'a bed for dogs',
@@ -82,7 +77,12 @@ RSpec.describe Item do
                         image: 'image url',
                         merchant_id: 3456
                       )
-      expect(Item.oldest).to eq(item_1)
+
+      visit '/items/dashboard'
+
+      expect(page).to have_content("Item By Age:")
+      expect(page).to have_content("#{Item.newest.title}")
+      expect(page).to have_content("#{Item.oldest.title}")
     end
   end
 end

@@ -1,13 +1,44 @@
-<% @merchants.each do |merchant| %>
-  <ul>
-    <li><a href="/merchants/<%=merchant.id%>"><%=merchant.name%></a></li>
-    <form action="/merchants/<%=merchant.id%>/edit" method="GET">
-      <input type="hidden" name="_method" value="EDIT">
-      <input type="submit" value="Edit">
-    </form>
-    <form action="/merchants/<%= merchant.id %>" method="POST">
-      <input type="hidden" name="_method" value="DELETE">
-      <input type="submit" value="Delete">
-    </form>
-  </ul>
-<% end %>
+<!DOCTYPE html>
+  <html>
+    <head>
+      <meta charset="utf-8" />
+      <meta http-equiv="X-UA-Compatible" content="IE=edge">
+      <title>LittleShop</title>
+      <meta name="viewport" content="width=device-width, initial-scale=1">
+      <link rel="stylesheet" type="text/css" media="screen" href="/stylesheets/main.css" />
+      
+    </head>
+  <body>
+    <nav id="navbar">
+      <ul>
+        <li style="float:left"><a class="logo" href="/merchants">LittleShop</a></li>
+        <li><a href="/merchants">Merchants</a></li>
+        <li><a href="/items">Items</a></li>
+        <li><a href="/invoices">Invoices</a></li>
+      </ul>
+    </nav>
+    <div class="banner">
+      <p><a href="/merchants/dashboard">Dashboard</a></p>
+      <h1 class="title">Merchants</h1>
+      <form method="get" action="merchants/new">
+        <button type="submit">Create A New Merchant</button>
+      </form>
+    </div>
+    <section>
+    <% @merchants.each do |merchant| %>
+      <table>
+        <tr><td class="row-name"><a href="/merchants/<%=merchant.id%>"><%=merchant.name%></a></td>
+          <td class="row-edit"><form action="/merchants/<%=merchant.id%>/edit" method="GET">
+            <input type="hidden" name="_method" value="EDIT">
+            <input type="submit" value="Edit">
+          </form></td>
+          <td class="row-delete"><form action="/merchants/<%= merchant.id %>" method="POST">
+            <input type="hidden" name="_method" value="DELETE">
+            <input type="submit" value="Delete">
+          </form></td>
+        </tr>
+      </table>
+    <% end %>
+    </section>
+  </body>
+</html>

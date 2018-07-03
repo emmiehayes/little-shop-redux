@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+  <html>
+    <head>
+      <meta charset="utf-8" />
+      <meta http-equiv="X-UA-Compatible" content="IE=edge">
+      <title>LittleShop</title>
+      <meta name="viewport" content="width=device-width, initial-scale=1">
+      <link rel="stylesheet" type="text/css" media="screen" href="/stylesheets/main.css" />
+      
+    </head>
+    <body>
+      <nav id="navbar">
+        <ul>
+          <li style="float:left"><a class="logo" href="/merchants">LittleShop</a></li>
+          <li><a href="/merchants">Merchants</a></li>
+          <li><a href="/items">Items</a></li>
+          <li><a href="/invoices">Invoices</a></li>
+        </ul>
+      </nav>
+      <div class="banner">
+        <h1 class="title">Items Dashboard</h1>
+      </div>
+      <section class="class-analysis">
+        <h5>Total Item Count: <%= @total_item_count %></h5>
+        <h5>Avg Price Per Item: $ <%= @average_unit_price.round(2) %></h5>
+        <h5>Item By Age:</h5>
+        <h5>Newest</h5>
+          <ul>
+            <li><p>Item:</p></li>
+            <li><a href="/items/<%= @newest.id%>"><%= @newest.title %></a></li>
+          </ul>
+        <h5>Oldest</h5>
+          <ul>
+            <li><p>Item:</p></li>
+            <li><a href="/items/<%= @oldest.id%>"><%= @oldest.title %></a></li>
+          </ul>
+      </section>
+    </body>
+  </html>

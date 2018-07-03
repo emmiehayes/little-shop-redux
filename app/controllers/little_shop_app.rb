@@ -1,5 +1,12 @@
 class LittleShopApp < Sinatra::Base
 
+  get '/merchants/dashboard' do
+    @merchants = Merchant.all
+    @most_items = Merchant.most_items
+    @highest_priced_item = Merchant.highest_priced_item
+    erb :'merchants/dashboard'
+  end
+
   get '/merchants' do
     @merchants = Merchant.all
     erb :'merchants/index'
@@ -34,12 +41,22 @@ class LittleShopApp < Sinatra::Base
     redirect '/merchants'
   end
 
+  get '/items/dashboard' do
+    @items = Item.all
+    @average_unit_price = Item.average_unit_price
+    @total_item_count = Item.total_item_count
+    @newest = Item.newest
+    @oldest = Item.oldest
+    erb :'items/dashboard'
+  end
+
   get '/items' do
     @items = Item.all
     erb :'items/index'
   end
 
   get '/items/new' do
+    @merchants = Merchant.all
     erb :'items/new'
   end
 
@@ -54,6 +71,7 @@ class LittleShopApp < Sinatra::Base
   end
 
   get '/items/:id/edit' do
+    @merchants = Merchant.all
     @item = Item.find(params[:id])
     erb :'items/edit'
   end
@@ -68,13 +86,26 @@ class LittleShopApp < Sinatra::Base
     redirect '/items'
   end
 
+  get '/invoices/dashboard' do
+    @invoices = Invoice.all.includes(:invoice_items)
+    @percentage_shipped = Invoice.percentage_by_status('shipped')
+    @percentage_pending = Invoice.percentage_by_status('pending')
+    @percentage_returned = Invoice.percentage_by_status('returned')
+    @lowest_total = Invoice.invoice_with_lowest_total
+    @highest_total = Invoice.invoice_with_highest_total
+    @lowest_quantity = Invoice.invoice_with_lowest_quantity
+    @highest_quantity = Invoice.invoice_with_highest_quantity
+    erb :'invoices/dashboard'
+  end
+
   get '/invoices' do
-    @invoices = Invoice.all
+    @invoices = Invoice.all.includes(:invoice_items)
     erb :'invoices/index'
   end
 
   get '/invoices/:id' do
     @invoice = Invoice.find(params[:id])
+    @merchant = Merchant.where(id: @invoice.merchant_id)
     erb :'invoices/show'
   end
 

@@ -1,14 +1,46 @@
-<h1><%= @item.title %></h1>
-<h2><%= @item.description %></h2>
-<h2><%= @item.price %></h2>
-<h2><%= @item.image %></h2>
+<!DOCTYPE html>
+  <html>
+    <head>
+      <meta charset="utf-8" />
+      <meta http-equiv="X-UA-Compatible" content="IE=edge">
+      <title>LittleShop</title>
+      <meta name="viewport" content="width=device-width, initial-scale=1">
+      <link rel="stylesheet" type="text/css" media="screen" href="/stylesheets/main.css" />
+      <link rel="stylesheet" type="text/css" media="screen" href="/stylesheets/show.css" />
+      
+    </head>
+  <body>
 
-<form action="/items/<%=item.id%>/edit" method="GET">
-  <input type="hidden" name="_method" value="EDIT">
-  <input type="submit" value="Edit">
-</form>
+    <nav id="navbar">
+      <ul>
+      <li style="float:left"><a class="logo" href="/merchants">LittleShop</a></li>
+      <li><a href="/merchants">Merchants</a></li>
+      <li><a href="/items">Items</a></li>
+      <li><a href="/invoices">Invoices</a></li>
+      </ul>
+    </nav>
 
-<form action="/items/<%= item.id %>" method="POST">
-  <input type="hidden" name="_method" value="DELETE">
-  <input type="submit" value="Delete">
-</form>
+    <div class="input-form">
+      <h1 class="title"><%= @item.title %></h1>
+
+      <form action="/items/<%= @item.id %>/edit" method="GET">
+        <input type="hidden" name="_method" value="EDIT">
+        <input style="background-color:cornflowerblue" type="submit" value="Edit">
+      </form>
+
+      <form action="/items/<%= @item.id %>" method="POST">
+        <input type="hidden" name="_method" value="DELETE">
+        <input class="delete-button" type="submit" value="Delete">
+      </form>
+      </div>
+      <section>
+        <ul>
+          <li><a href="/merchants/<%=@item.merchant.id%>"><%= @item.merchant.name %></a></li>
+          <li><img src='<%= @item.image %>'></li>
+          <li><%= @item.title %></li>
+          <li><%= @item.description %></li>
+          <li>$ <%= '%.2f' % @item.price %></li>
+        </ul>
+      </section>
+    </body>
+  </html>

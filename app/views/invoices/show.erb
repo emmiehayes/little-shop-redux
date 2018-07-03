@@ -1,12 +1,56 @@
-<h1><%= @invoice.merchant_id %></h1>
-<h2><%= @invoice.status %></h2>
-
-<form action="/invoices/<%= @invoice.id %>/edit" method="GET">
-  <input type="hidden" name="_method" value="EDIT">
-  <input type="submit" value="Edit">
-</form>
-
-<form action="/invoices/<%= @invoice.id %>" method="POST">
-  <input type="hidden" name="_method" value="DELETE">
-  <input type="submit" value="Delete">
-</form>
+<!DOCTYPE html>
+  <html>
+    <head>
+      <meta charset="utf-8" />
+      <meta http-equiv="X-UA-Compatible" content="IE=edge">
+      <title>LittleShop</title>
+      <meta name="viewport" content="width=device-width, initial-scale=1">
+      <link rel="stylesheet" type="text/css" media="screen" href="/stylesheets/main.css" />
+      <link rel="stylesheet" type="text/css" media="screen" href="/stylesheets/show.css" />
+      
+    </head>
+    <body>
+      <nav id="navbar">
+        <ul>
+        <li style="float:left"><a class="logo" href="/merchants">LittleShop</a></li>
+        <li><a href="/merchants">Merchants</a></li>
+        <li><a href="/items">Items</a></li>
+        <li><a href="/invoices">Invoices</a></li>
+        </ul>
+      </nav>
+      <h1>Invoice: <%= @invoice.id %></h1>
+      <h1 id="invoice-status"><%= @invoice.status %></h1>
+      <section>
+      <div class="input-form">
+      <form action="/invoices/<%= @invoice.id %>/edit" method="GET">
+        <input type="hidden" name="_method" value="EDIT">
+        <input style="background-color:cornflowerblue" type="submit" value="Edit">
+      </form>
+      <form action="/invoices/<%= @invoice.id %>" method="POST">
+        <input type="hidden" name="_method" value="DELETE">
+        <input type="submit" value="Delete">
+      </form>
+      </div>
+      <a href="/merchants/<%=@invoice.merchant_id %>"><h2><%=@merchant.first.name%></h2></a>
+        <table>
+            <th>Item ID</th>
+            <th>Title</th>
+            <th>Quantity</th>
+            <th>Price</th>
+            <th>Subtotal</th>
+          <% @invoice.invoice_items.each do |invoice_item| %>
+          <tr>
+            <td><%= invoice_item.item_id %></td>
+            <td><%= invoice_item.item.title %></td>
+            <td><%= invoice_item.quantity %></td>
+            <td><%= invoice_item.item.price.to_s.insert(-3, '.') %></td>
+            <td id="subtotal"><%= (invoice_item.quantity * invoice_item.item.price).to_s.insert(-3, '.') %></td>
+          </tr>
+          <% end %>
+        </table>
+      </section>
+      <section id="invoice-total">
+        <h3>INVOICE TOTAL: <div id="total">$<%=@invoice.total_price %></div></h3>
+      </section>
+    </body>
+  </html>

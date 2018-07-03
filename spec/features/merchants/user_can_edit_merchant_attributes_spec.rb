@@ -1,5 +1,6 @@
-describe 'User sees an edit merchant page' do
-  it 'shows an edit merchant form' do
+RSpec.describe 'User' do
+  context 'visting /merchants/id/edit' do
+    it 'can edit merchant name' do
     merchant = Merchant.create(name: '7-11')
     new_name = 'Smoke 420 Vape'
 
@@ -10,5 +11,6 @@ describe 'User sees an edit merchant page' do
     expect(current_path).to eq("/merchants/#{merchant.id}")
     expect(page).to have_content(new_name)
     expect(page).to_not have_content(merchant.name)
+    end
   end
 end

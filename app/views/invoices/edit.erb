@@ -1,7 +1,34 @@
-<form class='edit-invoice' action='/invoices/<%= @invoice.id %>' method='POST'>
-  <p>Edit Invoice No. <%= @invoice.id %>:</p>
-  <input type='hidden' name='_method' value='PUT'>
-  <input type='integer' name='invoice[merchant_id]' value='<%= @invoice.merchant_id %>'>
-  <input type='text' name='invoice[status]' value='<%= @invoice.status %>'>
-  <input type='submit' value='Edit Invoice'>
-</form>
+<!DOCTYPE html>
+  <html>
+    <head>
+      <meta charset="utf-8" />
+      <meta http-equiv="X-UA-Compatible" content="IE=edge">
+      <title>LittleShop</title>
+      <meta name="viewport" content="width=device-width, initial-scale=1">
+      <link rel="stylesheet" type="text/css" media="screen" href="/stylesheets/main.css" />
+    </head>
+    <body>
+      <nav id="navbar">
+        <ul>
+        <li style="float:left"><a class="logo" href="/merchants">LittleShop</a></li>
+        <li><a href="/merchants">Merchants</a></li>
+        <li><a href="/items">Items</a></li>
+        <li><a href="/invoices">Invoices</a></li>
+        </ul>
+      </nav>
+
+      <p>Edit Invoice No. <%= @invoice.id %>:</p>
+      <form class='edit-invoice' action='/invoices/<%= @invoice.id %>' method='POST'>
+        <input type='integer' name='invoice[merchant_id]' value='<%= @invoice.merchant_id %>' disabled>
+        <p>Current Status: <%= @invoice.status %></p>
+        <p><label>Update Status</label></br>
+        <select name='invoice[status]' class="status-drop-down-list">
+          <option value="pending">Pending</option>
+          <option value="shipped">Shipped</option>
+          <option value="returned">Returned</option>
+        </select></p></br>
+        <input type='hidden' name='_method' value='PUT'>
+        <input type='submit' value='Edit Invoice'>
+      </form>
+    </body>
+  </html>

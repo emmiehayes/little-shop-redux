@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+  <html>
+    <head>
+      <meta charset="utf-8" />
+      <meta http-equiv="X-UA-Compatible" content="IE=edge">
+      <title>LittleShop</title>
+      <meta name="viewport" content="width=device-width, initial-scale=1">
+      <link rel="stylesheet" type="text/css" media="screen" href="/stylesheets/main.css" />
+      
+    </head>
+
+    <body>
+      <nav id="navbar">
+        <ul>
+        <li style="float:left"><a class="logo" href="/merchants">LittleShop</a></li>
+        <li><a href="/merchants">Merchants</a></li>
+        <li><a href="/items">Items</a></li>
+        <li><a href="/invoices">Invoices</a></li>
+        </ul>
+      </nav>
+      <h1>Merchants Dashboard</h1>
+
+      <section class="class-analysis">
+          <h5>Merchant With Most Items: <%= @most_items.name %></h5>
+          <h5>Merchant With Highest Price Item: <%= @highest_priced_item.name %></h5>
+      </section>
+
+      <section>
+        <% @merchants.each do |merchant| %>
+        <ul>
+          <li><a href="/merchants/<%=merchant.id%>"><p><%= merchant.name %></p></a>
+          <li><p>Item Count: <%= merchant.total_merchant_items %></p></li>
+          <li><p>Avg Item Price: $ <%= '%.2f' % merchant.average_item_price %></p></li>
+          <li><p>Total Cost of Items: $ <%= '%.2f' % merchant.total_price_all_items %></p></li>
+        </ul>
+        <% end %>
+    </section>
+
+    </body>
+  </html>
