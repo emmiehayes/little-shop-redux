@@ -8,7 +8,6 @@ layout: page
 ### Work Time- 1 week, 1 hour of class time was dedicated to design work time. 95% of project completed outside of class.
 ### New Tools learned: ActiveRecord, Sinatra, Postgres, HTML5, CSS, MVC, HTTP, RSpec Testing, Waffle.io
 
-
 #PROJECT SPEC:
 ## Abstract
 
