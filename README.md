@@ -8,7 +8,7 @@ layout: page
 ### Work Time- 1 week, 1 hour of class time was dedicated to design work time. 95% of project completed outside of class.
 ### New Tools learned: ActiveRecord, Sinatra, Postgres, HTML5, CSS, MVC, HTTP, RSpec Testing, Waffle.io
 
-#PROJECT SPEC:
+# PROJECT SPEC:
 ## Abstract
 
 In this project you'll use Ruby, Sinatra, and ActiveRecord to build a site that shows items by categories and analyzes those items.
